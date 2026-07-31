@@ -1,0 +1,1139 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>🍦 Ice Cream Date</title>
+
+<style>
+
+/* =========================
+   BASIC PAGE
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(circle at top, #5c176f, #17051f 65%);
+
+    color: white;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    overflow-y: auto;
+
+    padding: 20px 0;
+
+}
+
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.card {
+
+    width: calc(100% - 30px);
+
+    max-width: 450px;
+
+    min-height: 550px;
+
+    padding: 25px 18px 35px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,0.10);
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    border-radius: 28px;
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,0.4);
+
+}
+
+
+/* =========================
+   HIDE PAGES
+========================= */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+h1 {
+
+    font-size: 27px;
+
+    line-height: 1.25;
+
+    margin: 15px 0;
+
+}
+
+h2 {
+
+    font-size: 22px;
+
+}
+
+p {
+
+    color: #dddddd;
+
+    font-size: 16px;
+
+    line-height: 1.5;
+
+}
+
+.step {
+
+    color: #ff9bd5;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+
+}
+
+
+/* =========================
+   EMOJIS
+========================= */
+
+.emoji {
+
+    font-size: 65px;
+
+    margin: 10px 0;
+
+    animation: bounce 1.5s infinite;
+
+}
+
+@keyframes bounce {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+
+    display: block;
+
+    width: 100%;
+
+    max-width: 350px;
+
+    margin: 10px auto;
+
+    padding: 15px 12px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4da6,
+            #9b5cff
+        );
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.25);
+
+    transition: transform 0.15s;
+
+}
+
+button:active {
+
+    transform: scale(0.95);
+
+}
+
+
+/* =========================
+   CHOICE BUTTONS
+========================= */
+
+.choice {
+
+    background: rgba(255,255,255,0.12);
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+}
+
+.choice.selected {
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4da6,
+            #9b5cff
+        );
+
+    border: 2px solid white;
+
+}
+
+
+/* =========================
+   NO BUTTON
+========================= */
+
+.no {
+
+    background: #555;
+
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+input {
+
+    display: block;
+
+    width: 100%;
+
+    max-width: 350px;
+
+    margin: 15px auto;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    font-size: 16px;
+
+    text-align: center;
+
+    background: white;
+
+    color: #222;
+
+}
+
+
+/* =========================
+   FINAL HEART
+========================= */
+
+.big-heart {
+
+    font-size: 85px;
+
+    margin-top: 10px;
+
+    animation: heartbeat 1s infinite;
+
+}
+
+@keyframes heartbeat {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.25);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.15);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================
+   FINAL SUMMARY
+========================= */
+
+.summary {
+
+    text-align: left;
+
+    background:
+        rgba(0,0,0,0.25);
+
+    border-radius: 18px;
+
+    padding: 18px;
+
+    margin: 20px 0;
+
+    line-height: 2;
+
+    font-size: 15px;
+
+}
+
+
+/* =========================
+   FLOATING EMOJIS
+========================= */
+
+.floating {
+
+    position: fixed;
+
+    bottom: -50px;
+
+    font-size: 25px;
+
+    pointer-events: none;
+
+    z-index: 100;
+
+    animation:
+        floatUp linear forwards;
+
+}
+
+@keyframes floatUp {
+
+    from {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0;
+
+    }
+
+    20% {
+
+        opacity: 1;
+
+    }
+
+    to {
+
+        transform:
+            translateY(-110vh)
+            rotate(360deg);
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 380px) {
+
+    .card {
+
+        width: calc(100% - 20px);
+
+        padding:
+            20px 14px 30px;
+
+    }
+
+    h1 {
+
+        font-size: 24px;
+
+    }
+
+    .emoji {
+
+        font-size: 55px;
+
+    }
+
+    button {
+
+        font-size: 15px;
+
+        padding: 13px 10px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="card">
+
+
+<!-- =================================
+     PAGE 1
+================================= -->
+
+<div id="page1">
+
+    <div class="emoji">
+        🍦
+    </div>
+
+    <h1>
+        I Have A Very Important Question...
+    </h1>
+
+    <p>
+        This is extremely serious. 😂<br>
+        Please think carefully.
+    </p>
+
+    <h1>
+        Will you buy me ice cream? ❤️
+    </h1>
+
+    <button onclick="startOrder()">
+        YES 🍦
+    </button>
+
+    <button onclick="startOrder()">
+        YES, OBVIOUSLY 😌
+    </button>
+
+    <button
+        id="noButton"
+        class="no"
+        onclick="escapeNo()">
+
+        NO 😭
+
+    </button>
+
+    <p id="noMessage"></p>
+
+</div>
+
+
+<!-- =================================
+     PAGE 2 - FLAVOR
+================================= -->
+
+<div id="page2" class="hidden">
+
+    <div class="step">
+        STEP 1 OF 4
+    </div>
+
+    <div class="emoji">
+        🍨
+    </div>
+
+    <h1>
+        Choose your flavor 🍦
+    </h1>
+
+    <p>
+        Choose wisely... this is important.
+    </p>
+
+
+    <button
+        class="choice"
+        onclick="chooseFlavor(this,'Chocolate 🍫')">
+
+        🍫 Chocolate
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="chooseFlavor(this,'Vanilla 🤍')">
+
+        🤍 Vanilla
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="chooseFlavor(this,'Strawberry 🍓')">
+
+        🍓 Strawberry
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="chooseFlavor(this,'Cookies & Cream 🍪')">
+
+        🍪 Cookies & Cream
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="chooseFlavor(this,'Mint Chocolate 🌿')">
+
+        🌿 Mint Chocolate
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="chooseFlavor(this,'Surprise Me 😏')">
+
+        😏 Surprise Me
+
+    </button>
+
+
+    <button onclick="goToLocation()">
+
+        NEXT →
+
+    </button>
+
+</div>
+
+
+<!-- =================================
+     PAGE 3 - LOCATION
+================================= -->
+
+<div id="page3" class="hidden">
+
+    <div class="step">
+        STEP 2 OF 4
+    </div>
+
+    <div class="emoji">
+        📍
+    </div>
+
+    <h1>
+        Where are we getting it?
+    </h1>
+
+    <p>
+        Choose a location or type one.
+    </p>
+
+
+    <button
+        class="choice"
+        onclick="chooseLocation(this,'MART 🛍️')">
+
+        🛍️ MART
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="chooseLocation(this,'3-LINE 🍦')">
+
+        🍦 3-LINE
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="chooseLocation(this,'You choose 😌')">
+
+        😌 You choose
+
+    </button>
+
+
+    <input
+        id="locationInput"
+        type="text"
+        placeholder="Or type a location..."
+    >
+
+
+    <button onclick="goToDate()">
+
+        NEXT →
+
+    </button>
+
+</div>
+
+
+<!-- =================================
+     PAGE 4 - DATE
+================================= -->
+
+<div id="page4" class="hidden">
+
+    <div class="step">
+        STEP 3 OF 4
+    </div>
+
+    <div class="emoji">
+        📅
+    </div>
+
+    <h1>
+        Pick the date 📅
+    </h1>
+
+    <p>
+        When are we getting that ice cream?
+    </p>
+
+
+    <input
+        id="dateInput"
+        type="date"
+    >
+
+
+    <button onclick="goToTime()">
+
+        NEXT →
+
+    </button>
+
+</div>
+
+
+<!-- =================================
+     PAGE 5 - TIME
+================================= -->
+
+<div id="page5" class="hidden">
+
+    <div class="step">
+        STEP 4 OF 4
+    </div>
+
+    <div class="emoji">
+        ⏰
+    </div>
+
+    <h1>
+        Choose the time ⏰
+    </h1>
+
+    <p>
+        Pick the perfect ice cream time.
+    </p>
+
+
+    <input
+        id="timeInput"
+        type="time"
+    >
+
+
+    <button onclick="finishOrder()">
+
+        CONFIRM 🍦
+
+    </button>
+
+</div>
+
+
+<!-- =================================
+     FINAL PAGE
+================================= -->
+
+<div id="finalPage" class="hidden">
+
+    <div class="big-heart">
+        ❤️
+    </div>
+
+    <h1>
+        ICE-CREAM DATE! 🍦
+    </h1>
+
+    <p>
+        Your extremely important ice cream
+        appointment has officially been scheduled.
+    </p>
+
+
+    <div class="summary">
+
+        🍦 <b>Flavor:</b>
+        <span id="finalFlavor"></span>
+
+        <br>
+
+        📍 <b>Location:</b>
+        <span id="finalLocation"></span>
+
+        <br>
+
+        📅 <b>Date:</b>
+        <span id="finalDate"></span>
+
+        <br>
+
+        ⏰ <b>Time:</b>
+        <span id="finalTime"></span>
+
+    </div>
+
+
+    <h2>
+        🍦❤️ THANK YOU ❤️🍦
+    </h2>
+
+    <p>
+        Looking forward to seeing you! ❤️🍦
+    </p>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+/* =================================
+   VARIABLES
+================================= */
+
+let flavor = "";
+
+let locationName = "";
+
+
+/* =================================
+   HIDE ALL PAGES
+================================= */
+
+function hideAll() {
+
+    document
+        .getElementById("page1")
+        .classList.add("hidden");
+
+    document
+        .getElementById("page2")
+        .classList.add("hidden");
+
+    document
+        .getElementById("page3")
+        .classList.add("hidden");
+
+    document
+        .getElementById("page4")
+        .classList.add("hidden");
+
+    document
+        .getElementById("page5")
+        .classList.add("hidden");
+
+    document
+        .getElementById("finalPage")
+        .classList.add("hidden");
+
+}
+
+
+/* =================================
+   START
+================================= */
+
+function startOrder() {
+
+    hideAll();
+
+    document
+        .getElementById("page2")
+        .classList.remove("hidden");
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* =================================
+   NO BUTTON
+================================= */
+
+function escapeNo() {
+
+    const button =
+        document.getElementById("noButton");
+
+    button.style.transform =
+        "translate(" +
+        (Math.random() * 150 - 75) +
+        "px," +
+        (Math.random() * 100 - 50) +
+        "px)";
+
+    document
+        .getElementById("noMessage")
+        .innerText =
+        "😂 Nice try! The NO button escaped!";
+
+}
+
+
+/* =================================
+   FLAVOR
+================================= */
+
+function chooseFlavor(button, value) {
+
+    const buttons =
+        document.querySelectorAll("#page2 .choice");
+
+    buttons.forEach(function(btn) {
+
+        btn.classList.remove("selected");
+
+    });
+
+    button.classList.add("selected");
+
+    flavor = value;
+
+}
+
+
+/* =================================
+   GO TO LOCATION
+================================= */
+
+function goToLocation() {
+
+    if (flavor === "") {
+
+        alert(
+            "Please choose an ice cream flavor! 🍦"
+        );
+
+        return;
+
+    }
+
+    hideAll();
+
+    document
+        .getElementById("page3")
+        .classList.remove("hidden");
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* =================================
+   LOCATION
+================================= */
+
+function chooseLocation(button, value) {
+
+    const buttons =
+        document.querySelectorAll("#page3 .choice");
+
+    buttons.forEach(function(btn) {
+
+        btn.classList.remove("selected");
+
+    });
+
+    button.classList.add("selected");
+
+    locationName = value;
+
+    document
+        .getElementById("locationInput")
+        .value = "";
+
+}
+
+
+/* =================================
+   GO TO DATE
+================================= */
+
+function goToDate() {
+
+    const typedLocation =
+        document
+        .getElementById("locationInput")
+        .value
+        .trim();
+
+
+    if (typedLocation !== "") {
+
+        locationName = typedLocation;
+
+    }
+
+
+    if (locationName === "") {
+
+        alert(
+            "Please choose or type a location! 📍"
+        );
+
+        return;
+
+    }
+
+
+    hideAll();
+
+    document
+        .getElementById("page4")
+        .classList.remove("hidden");
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* =================================
+   GO TO TIME
+================================= */
+
+function goToTime() {
+
+    const date =
+        document
+        .getElementById("dateInput")
+        .value;
+
+
+    if (date === "") {
+
+        alert(
+            "Please choose a date! 📅"
+        );
+
+        return;
+
+    }
+
+
+    hideAll();
+
+    document
+        .getElementById("page5")
+        .classList.remove("hidden");
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* =================================
+   FINISH
+================================= */
+
+function finishOrder() {
+
+    const date =
+        document
+        .getElementById("dateInput")
+        .value;
+
+
+    const time =
+        document
+        .getElementById("timeInput")
+        .value;
+
+
+    if (time === "") {
+
+        alert(
+            "Please choose a time! ⏰"
+        );
+
+        return;
+
+    }
+
+
+    document
+        .getElementById("finalFlavor")
+        .innerText = flavor;
+
+
+    document
+        .getElementById("finalLocation")
+        .innerText = locationName;
+
+
+    document
+        .getElementById("finalDate")
+        .innerText = date;
+
+
+    document
+        .getElementById("finalTime")
+        .innerText = time;
+
+
+    hideAll();
+
+    document
+        .getElementById("finalPage")
+        .classList.remove("hidden");
+
+    window.scrollTo(0,0);
+
+    celebration();
+
+}
+
+
+/* =================================
+   CELEBRATION
+================================= */
+
+function celebration() {
+
+    const emojis = [
+        "❤️",
+        "💗",
+        "🍦",
+        "🍨",
+        "✨"
+    ];
+
+
+    for (
+        let i = 0;
+        i < 40;
+        i++
+    ) {
+
+        const item =
+            document.createElement("div");
+
+
+        item.className =
+            "floating";
+
+
+        item.innerText =
+            emojis[
+                Math.floor(
+                    Math.random() *
+                    emojis.length
+                )
+            ];
+
+
+        item.style.left =
+            Math.random() * 100 + "vw";
+
+
+        item.style.animationDuration =
+            (3 + Math.random() * 4) + "s";
+
+
+        document.body.appendChild(item);
+
+
+        setTimeout(
+            function() {
+
+                item.remove();
+
+            },
+            7000
+        );
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+```
